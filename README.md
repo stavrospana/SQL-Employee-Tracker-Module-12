@@ -23,10 +23,6 @@ Selecting view options displays the corresponding database table. Opting to add 
 After each operation, you'll return to the main menu.
 
 
-## Credits
-
-https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba
-
 ## License
 
 Operates under a standard MIT license. For more information, refer to the LICENSE file in the repository, or visit the following website; https://opensource.org/licenses/MIT.
