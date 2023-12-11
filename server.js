@@ -12,7 +12,7 @@ const mysql = require("mysql2");
 const figlet = require("figlet");
 require('dotenv').config();
 
-//defining the main menu options
+//defines the main menu options
 const mainMenu = [
 {
   type: "list",
@@ -21,7 +21,7 @@ const mainMenu = [
   choices: ["View All Departments", "View All Roles", "View All Employees", "Add Department", "Add Role", "Add Employee", "Update Employee Role"]
 }];
 
-//defining prompts to add a new department to database
+//defining prompts to add a new department to the database
 const addDepartment = [
 {
   type: "input",
