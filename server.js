@@ -32,12 +32,12 @@ const addDepartment = [
 //function to return inquirer prompts where retrieving information from the database is necessary
 const updateInquirerPrompts = async (category) =>
 {
-  if (category === "role") //checks if the user is attempting to add to the 'role' table
+  if (category === "role") 
   {
     try 
     {
-      const [rows] = await db.promise().query(`SELECT * FROM department`); //retrieves a list of all departments from the database
-      const departments = rows.map(department => department.name); //maps each department's name to a new 'departments' array
+      const [rows] = await db.promise().query(`SELECT * FROM department`); 
+      const departments = rows.map(department => department.name); 
       
       
       return [
@@ -63,22 +63,22 @@ const updateInquirerPrompts = async (category) =>
       console.log(err);
     }
   }
-  else if (category === "employee") //checks if the user is attempting to add to the 'employee' table
+  else if (category === "employee") 
   {
     //perform SQL query to save list of role names to a variable
+
     let roles = await db.promise().query(`SELECT * FROM role`)
     .then(([rows]) => rows.map(role => role.title))
     .catch((err) => console.log(err));
 
-    //perform SQL query to save list of employee first & last names to a variable
+  
     let employees = await db.promise().query(`SELECT * FROM employee`)
     .then(([rows]) => rows.map(employee => `${employee.first_name} ${employee.last_name}`))
     .catch((err) => console.log(err));
 
-    //adds "None" to the top of the list of employees, indicating that the employee does not have an assigned manager
+
     employees.unshift("None");
 
-    //uses the above variables as lists for role & manager options to assign to the new employee, and returns the set of questions
     return [
     {
       type: "input",
@@ -110,12 +110,12 @@ const updateInquirerPrompts = async (category) =>
     .then(([rows]) => rows.map(role => role.title))
     .catch((err) => console.log(err));
     
-    //perform SQL query to save list of employee first & last names to a variable
+    
     let employees = await db.promise().query(`SELECT * FROM employee`)
     .then(([rows]) => rows.map(employee => `${employee.first_name} ${employee.last_name}`))
     .catch((err) => console.log(err));
 
-    //uses the above variables as lists for role & manager options to assign to the new employee, and returns the set of questions
+    
     return [
     {
       type: "list",
@@ -145,7 +145,7 @@ const db = mysql.createConnection(
 const processMenuChoice = async (data) =>
 {
   let menuType; //variable to hold type of menu choice selected by user
-  let menuChoice; //variable to hold the specific menu choice selected by the user, within the scope of the above type
+  let menuChoice; //variable to hold the specific menu choice selected by user
 
   //assign the appropriate variables as per the user's menu option choice
   if (data.menuChoice === "View All Departments")
@@ -181,14 +181,14 @@ const processMenuChoice = async (data) =>
   else if (data.menuChoice === "Update Employee Role")
   {
     menuType = "update";
-    menuChoice = "employee"; //assigning this is unnecessary, but is good future-proofing if functionality for updating other parts of the database were implemented
+    menuChoice = "employee"; 
   }
 
   if (menuType === "view") //checks if the user is attempting to view from the database
   {
     if (menuChoice === "department") //checks if the user chose to view all departments
     {
-      //attempts to print the ID & name of each department in a table to the console
+      
       await db.promise().query(`SELECT id, name AS department_name FROM department`)
       .then(([rows]) => console.table(rows))
       .catch((err) => console.log(err)); //if an error occurs, log it to the console
